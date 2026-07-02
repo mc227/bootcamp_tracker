@@ -137,6 +137,29 @@ CURRICULUM = [
         'Introduction to gRPC', 'Protocol Buffers Internals',
         "What's Next & Congratulations!",
     ]),
+    # NOTE: the two hands-on sections below are a topic-level reconstruction of the
+    # course's Java and Go code-generation flow — not verbatim video titles.
+    # Paste the course's Java/Go outline if you want these made exact.
+    ('12 · Protocol Buffers 3 (Maarek) — Hands-on: Java', [
+        'Java Project Setup (Gradle + protobuf-gradle-plugin)',
+        'Generating Java Code from .proto',
+        'Creating a Simple Message in Java',
+        'Complex Message (nested, repeated, enums)',
+        'Serializing to Bytes & Writing to a File',
+        'Reading from a File & Deserializing',
+        'Protobuf <-> JSON in Java',
+        'Wrap-up (Java)',
+    ]),
+    ('12 · Protocol Buffers 3 (Maarek) — Hands-on: Go', [
+        'Go Project Setup',
+        'Installing the Go Plugin (protoc-gen-go)',
+        'Generating Go Code from .proto',
+        'Creating a Simple Message in Go',
+        'Complex Message (nested, repeated, enums)',
+        'Writing to a File & Reading Back',
+        'Protobuf <-> JSON in Go',
+        'Wrap-up (Go)',
+    ]),
     ('13 · Python Sockets (Eramo) — Setup & Networking', [
         'Course Preview', 'Python Installation and Setup', 'VS Code Installation',
         'Creating our Working Directory', 'A Brief Overview of Networking Concepts',
