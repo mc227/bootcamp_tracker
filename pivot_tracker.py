@@ -1,10 +1,9 @@
 """
 Pivot — Sep 2026 Study Tracker
 A tkinter desktop app tracking the curated 26-item O'Reilly playlist
-(10 Maxwell/Prasad/Gaines Python courses -> Linux Net/Sec -> Protobuf ->
-Sockets -> Bash -> Docker -> Microservices -> System Design -> two coding-
-interview courses -> Heineman DSA -> Sarda DSA/Blind75 -> Computer
-Architecture -> JavaScript -> CSS -> two interview-strategy courses).
+Reordered into three blocks: FINISHED & SKIPPED first, then BLIND 75 (Sarda)
+as the current priority, then everything still REMAINING. The indices in
+pivot_progress.json are remapped to match this order.
 
 Saves progress to pivot_progress.json in the same folder as this script.
 Run it with: python pivot_tracker.py
@@ -26,17 +25,148 @@ TARGET_DEFAULT = "2026-09-30"   # your pivot deadline
 # Sections are prefixed with the playlist item number (1-26).
 # ----------------------------------------------------------------------
 CURRICULUM = [
-    # ===================== Python craft foundations (Maxwell x8 + Prasad + Gaines) =====================
+    # ===================== FINISHED & SKIPPED — your progress so far =====================
     ('1 · Pythonic OOP (Maxwell)', [
         'The Key Ideas of Powerful Objects', 'Writing Simple (and Useful) Python Classes',
         "Leveraging Methods (Python's special requirements)",
         'Encapsulation and Data Hiding', "Inheritance and 'is-a' Relationships",
-        'The Different Kinds of Inheritance Hierarchies',
-        'Interfaces and Abstract Methods',
+        'The Different Kinds of Inheritance Hierarchies', 'Interfaces and Abstract Methods',
         'The Single-Responsibility and Substitution Principles',
-        'Gracefully Refactoring Your Classes as Requirements Evolve',
-        'Python Data Classes', 'Wrap-up and Q&A',
+        'Gracefully Refactoring Your Classes as Requirements Evolve', 'Python Data Classes',
+        'Wrap-up and Q&A',
     ]),
+    ('12 · Protocol Buffers 3 (Maarek)', [
+        'The Need for Protocol Buffers', 'How Are Protocol Buffers Used?',
+        'Course Structure', 'First Message', 'Scalar Types', 'Tags', 'Repeated Fields',
+        'Comments', 'Default Values for Fields', 'Enumerations (Enums)',
+        'Solution to Practice Exercises I', 'Defining Multiple Messages in the Same File',
+        'Nesting Messages', 'Imports', 'Packages', 'Solution to Practice Exercises II',
+        'Use protoc to Generate Code in Any Language', 'The Need for Updating the Protocol',
+        'Rules for Data Evolution', 'Adding Fields', 'Renaming Fields', 'Removing Fields',
+        'Reserved Keyword', 'Beware of Defaults', 'Evolving Enum Fields',
+        'Integer Types Deep Dive', 'Advanced Data Types (oneof, map, Timestamp, Duration)',
+        'Protocol Buffers Options', 'Naming Conventions', 'Services',
+        'Introduction to gRPC', 'Protocol Buffers Internals',
+        "What's Next & Congratulations!",
+    ]),
+    # NOTE: the two protobuf hands-on sections are a topic-level reconstruction of the
+    # course's Java and Go code-generation flow — not verbatim video titles.
+    ('12 · Protocol Buffers 3 (Maarek) — Hands-on: Java', [
+        'Java Project Setup (Gradle + protobuf-gradle-plugin)',
+        'Generating Java Code from .proto', 'Creating a Simple Message in Java',
+        'Complex Message (nested, repeated, enums)',
+        'Serializing to Bytes & Writing to a File', 'Reading from a File & Deserializing',
+        'Protobuf <-> JSON in Java', 'Wrap-up (Java)',
+    ]),
+    ('12 · Protocol Buffers 3 (Maarek) — Hands-on: Go', [
+        'Go Project Setup', 'Installing the Go Plugin (protoc-gen-go)',
+        'Generating Go Code from .proto', 'Creating a Simple Message in Go',
+        'Complex Message (nested, repeated, enums)', 'Writing to a File & Reading Back',
+        'Protobuf <-> JSON in Go', 'Wrap-up (Go)',
+    ]),
+    ('13 · Python Sockets (Eramo) — Setup & Networking', [
+        'Course Preview', 'Python Installation and Setup', 'VS Code Installation',
+        'Creating our Working Directory', 'A Brief Overview of Networking Concepts',
+    ]),
+    ('13 · Python Sockets (Eramo) — TCP & UDP', [
+        'Creating a TCP Server Socket', 'Creating a TCP Client Socket',
+        'Sending Data through a TCP Connection',
+        'Creating and Sending Data through a UDP Server/Client',
+        'Exploring the Buffer Size',
+    ]),
+    ('13 · Python Sockets (Eramo) — Threading Basics', [
+        'The Threading Module Basics Pt 1', 'The Threading Module Basics Pt 2',
+    ]),
+    ('13 · Python Sockets (Eramo) — Basic Two-Way Chat', [
+        'Basic Two-Way Chat Pt 1 — Server/Client Setup',
+        'Basic Two-Way Chat Pt 2 — Enabling the Chat',
+    ]),
+    ('13 · Python Sockets (Eramo) — Terminal Chat Room', [
+        'Terminal Chat Room Pt 1 — Server/Client Setup',
+        'Terminal Chat Room Pt 2 — Adding Functionality',
+        'Terminal Chat Room Pt 3 — Adding Functionality',
+        'Terminal Chat Room Pt 4 — Functionality & Testing',
+    ]),
+    # ===================== BLIND 75 (Sarda) — current priority =====================
+    # NOTE: Sarda list confirmed against the full course outline (83 problems + Bonus).
+    # The course is a flat problem list; the topic sub-headers are ours for navigation.
+    ('21 · Master DSA / Blind 75+ (Sarda) — Arrays & Hashing', [
+        'Two Sum (1)', 'Contains Duplicate (217)', 'Valid Anagram (242)',
+        'Group Anagrams (49)', 'Top K Frequent Elements (347)', 'Is Subsequence (392)',
+        'Longest Consecutive Sequence (128)', 'Product of Array Except Self (238)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Two Pointers', [
+        'Valid Palindrome (125)', 'Two Sum II (167)', '3Sum (15)',
+        'Container With Most Water (11)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Sliding Window', [
+        'Maximum Average Subarray I (643)', 'Best Time to Buy and Sell Stock (121)',
+        'Longest Repeating Character Replacement (424)',
+        'Longest Substring Without Repeating Characters (3)',
+        'Minimum Window Substring (76)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Linked List', [
+        'Middle of the Linked List (876)', 'Linked List Cycle (141)',
+        'Linked List Cycle II (142)', 'Reverse Linked List (206)', 'Reorder List (143)',
+        'Remove Nth Node From End of List (19)', 'Merge Two Sorted Lists (21)',
+        'Merge k Sorted Lists (23)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Stack', [
+        'Valid Parentheses (20)', 'Daily Temperatures (739)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Binary Search', [
+        'Binary Search (704)', 'Find Minimum in Rotated Sorted Array (153)',
+        'Search in Rotated Sorted Array (33)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Trees (DFS/BFS)', [
+        'Invert Binary Tree (226)', 'Maximum Depth of Binary Tree (104)', 'Same Tree (100)',
+        'Subtree of Another Tree (572)', 'Lowest Common Ancestor of a BST (235)',
+        'Binary Tree Level Order Traversal (102)', 'Validate Binary Search Tree (98)',
+        'Kth Smallest Element in a BST (230)',
+        'Construct Binary Tree from Preorder and Inorder (105)',
+        'Binary Tree Maximum Path Sum (124)', 'Serialize and Deserialize Binary Tree (297)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Backtracking', [
+        'Combination Sum (39)', 'Word Search (79)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Tries', [
+        'Implement Trie (208)', 'Add and Search Words Data Structure (211)',
+        'Word Search II (212)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Heap / Priority Queue', [
+        'Find Median from Data Stream (295)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Graphs', [
+        'Number of Islands (200)', 'Clone Graph (133)', 'Pacific Atlantic Water Flow (417)',
+        'Graph Valid Tree (261)', 'Number of Connected Components (323)',
+        'Course Schedule (207)', 'Alien Dictionary (269)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Dynamic Programming', [
+        'Fibonacci Number (509)', 'Coin Change (322)', 'Climbing Stairs (70)',
+        'House Robber (198)', 'House Robber II (213)', 'Palindromic Substrings (647)',
+        'Longest Palindromic Substring (5)', 'Maximum Product Subarray (152)',
+        'Decode Ways (91)', 'Word Break (139)', 'Longest Increasing Subsequence (300)',
+        'Longest Common Subsequence (1143)', 'Unique Paths (62)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Greedy', [
+        'Boats to Save People (881)', 'Maximum Subarray (53)', 'Jump Game (55)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Intervals', [
+        'Merge Intervals (56)', 'Insert Interval (57)', 'Non-overlapping Intervals (435)',
+        'Meeting Rooms (252)', 'Meeting Rooms II (253)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Matrix', [
+        'Rotate Image (48)', 'Spiral Matrix (54)', 'Set Matrix Zeroes (73)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Bit Manipulation', [
+        'Counting Bits (338)', 'Missing Number (268)', 'Number of 1 Bits (191)',
+        'Reverse Bits (190)', 'Sum of Two Integers (371)',
+    ]),
+    ('21 · Master DSA / Blind 75+ (Sarda) — Bonus', [
+        'Bonus',
+    ]),
+
+    # ===================== REMAINING — still to do =====================
     ('2 · Python: Beyond the Basics (Maxwell)', [
         'Generators for Efficient, Scalable, Well-Encapsulated Code',
         "Demystifying Python's Iterator Protocol",
@@ -108,7 +238,6 @@ CURRICULUM = [
         'Race Conditions', 'Thread Synchronization Using Locks (deadlock)',
         'Wrap-up and Q&A',
     ]),
-    # ===================== Linux / domain (Prowse) =====================
     ('11 · Linux Networking & Security (Prowse) — Day 1: Networking', [
         'Network commands & configuration (ip, ss, nmap, tcpdump, nmcli)',
         'Connecting between hosts (SSH keys, certificates, rsync)',
@@ -121,58 +250,6 @@ CURRICULUM = [
         'User & application security (authentication, AppArmor, SELinux)',
         'Firewalling (firewalld, nftables)',
     ]),
-    # ===================== Protocol / networking domain =====================
-    ('12 · Protocol Buffers 3 (Maarek)', [
-        'The Need for Protocol Buffers', 'How Are Protocol Buffers Used?',
-        'Course Structure', 'First Message', 'Scalar Types', 'Tags', 'Repeated Fields',
-        'Comments', 'Default Values for Fields', 'Enumerations (Enums)',
-        'Solution to Practice Exercises I', 'Defining Multiple Messages in the Same File',
-        'Nesting Messages', 'Imports', 'Packages', 'Solution to Practice Exercises II',
-        'Use protoc to Generate Code in Any Language',
-        'The Need for Updating the Protocol', 'Rules for Data Evolution', 'Adding Fields',
-        'Renaming Fields', 'Removing Fields', 'Reserved Keyword', 'Beware of Defaults',
-        'Evolving Enum Fields', 'Integer Types Deep Dive',
-        'Advanced Data Types (oneof, map, Timestamp, Duration)',
-        'Protocol Buffers Options', 'Naming Conventions', 'Services',
-        'Introduction to gRPC', 'Protocol Buffers Internals',
-        "What's Next & Congratulations!",
-    ]),
-    # NOTE: the two hands-on sections below are a topic-level reconstruction of the
-    # course's Java and Go code-generation flow — not verbatim video titles.
-    # Paste the course's Java/Go outline if you want these made exact.
-    ('12 · Protocol Buffers 3 (Maarek) — Hands-on: Java', [
-        'Java Project Setup (Gradle + protobuf-gradle-plugin)',
-        'Generating Java Code from .proto',
-        'Creating a Simple Message in Java',
-        'Complex Message (nested, repeated, enums)',
-        'Serializing to Bytes & Writing to a File',
-        'Reading from a File & Deserializing',
-        'Protobuf <-> JSON in Java',
-        'Wrap-up (Java)',
-    ]),
-    ('12 · Protocol Buffers 3 (Maarek) — Hands-on: Go', [
-        'Go Project Setup',
-        'Installing the Go Plugin (protoc-gen-go)',
-        'Generating Go Code from .proto',
-        'Creating a Simple Message in Go',
-        'Complex Message (nested, repeated, enums)',
-        'Writing to a File & Reading Back',
-        'Protobuf <-> JSON in Go',
-        'Wrap-up (Go)',
-    ]),
-    ('13 · Python Sockets (Eramo) — Setup & Networking', [
-        'Course Preview', 'Python Installation and Setup', 'VS Code Installation',
-        'Creating our Working Directory', 'A Brief Overview of Networking Concepts',
-    ]),
-    ('13 · Python Sockets (Eramo) — TCP & UDP', [
-        'Creating a TCP Server Socket', 'Creating a TCP Client Socket',
-        'Sending Data through a TCP Connection',
-        'Creating and Sending Data through a UDP Server/Client',
-        'Exploring the Buffer Size',
-    ]),
-    ('13 · Python Sockets (Eramo) — Threading Basics', [
-        'The Threading Module Basics Pt 1', 'The Threading Module Basics Pt 2',
-    ]),
     ('13 · Python Sockets (Eramo) — Serialization (Pickle/JSON)', [
         'The Pickle Module — Sending Objects through the Data Stream',
         'The JSON Module — Sending Objects through the Data Stream',
@@ -180,16 +257,6 @@ CURRICULUM = [
     ('13 · Python Sockets (Eramo) — Fixed-Length Headers', [
         'Fixed-Length Headers — Shortcomings of a Fixed Max Byte Size',
         'Fixed-Length Headers — The Solution',
-    ]),
-    ('13 · Python Sockets (Eramo) — Basic Two-Way Chat', [
-        'Basic Two-Way Chat Pt 1 — Server/Client Setup',
-        'Basic Two-Way Chat Pt 2 — Enabling the Chat',
-    ]),
-    ('13 · Python Sockets (Eramo) — Terminal Chat Room', [
-        'Terminal Chat Room Pt 1 — Server/Client Setup',
-        'Terminal Chat Room Pt 2 — Adding Functionality',
-        'Terminal Chat Room Pt 3 — Adding Functionality',
-        'Terminal Chat Room Pt 4 — Functionality & Testing',
     ]),
     ('13 · Python Sockets (Eramo) — Tkinter Module', [
         'Tkinter — Defining a Root Window', 'Tkinter — Adding Frames',
@@ -220,8 +287,8 @@ CURRICULUM = [
         'Configuring a Second Router (Different Settings)',
     ]),
     ('13 · Python Sockets (Eramo) — Pygame Module', [
-        'Pygame — Creating a Game Window and Game Loop',
-        'Pygame — Setting Up a Game Class', 'Pygame — Setting Up a Player Class',
+        'Pygame — Creating a Game Window and Game Loop', 'Pygame — Setting Up a Game Class',
+        'Pygame — Setting Up a Player Class',
     ]),
     ('13 · Python Sockets (Eramo) — Online Multiplayer Game', [
         'Online MP Game Pt 1 — Setting Up the Server',
@@ -237,7 +304,6 @@ CURRICULUM = [
         'Online MP Game Pt 11 — Resetting the Game for More Rounds',
         'Online MP Game Pt 12 — Official Network Playtest!',
     ]),
-    # ===================== Shell / containers / microservices =====================
     ('14 · Bash Shell Scripting (van Vugt)', [
         'Introducing the sample shell script (flow & elements)',
         'Writing a script with basic elements (readable scripts, internal/external commands)',
@@ -251,16 +317,15 @@ CURRICULUM = [
         'Installing Docker Tools', 'Creating Dockerfile', 'Creating API Application',
         'Preparing API Docker Image', 'Starting API Server', 'Docker Hub',
         'Environment Variables', 'Adding Database', 'Making Database Requests', 'Volumes',
-        'Auth Service', 'Frontend Service', 'Running Frontend in Production',
-        'Docker Exec', 'Setting Up Nginx', 'Proxying API Requests', 'Docker Network',
-        'Frontend Proxy', 'Last Tuning', 'Do It Yourself: Mailer Service',
+        'Auth Service', 'Frontend Service', 'Running Frontend in Production', 'Docker Exec',
+        'Setting Up Nginx', 'Proxying API Requests', 'Docker Network', 'Frontend Proxy',
+        'Last Tuning', 'Do It Yourself: Mailer Service',
     ]),
     ('16 · Microservices Bootcamp (Newman)', [
         'What Microservices Are', 'The Problem with Coupling', 'Domain-Driven Design',
         'Boundaries, Teamwork & Communication Patterns',
         'Deployment, Troubleshooting, Observability',
     ]),
-    # ===================== Interview / CS core =====================
     ('17 · System Design Interview Boot Camp (Bhardwaj)', [
         'System Design Basics', 'Architecture Basics',
         'Mock: Taxi / Streaming / Real-Time Analytics',
@@ -290,87 +355,6 @@ CURRICULUM = [
         'Sorting (TimSort, InsertionSort, MergeSort)', 'Graph Algorithms',
         'Skip List Implementation',
     ]),
-    # ===================== Sarda DSA / Blind 75+ (replaces old Blind 75 section) =====================
-    # Confirmed against the full course outline (83 problems + Bonus). The course
-    # is a flat problem list; the topic sub-headers below are ours for navigation.
-    ('21 · Master DSA / Blind 75+ (Sarda) — Arrays & Hashing', [
-        'Two Sum (1)', 'Contains Duplicate (217)', 'Valid Anagram (242)',
-        'Group Anagrams (49)', 'Top K Frequent Elements (347)', 'Is Subsequence (392)',
-        'Longest Consecutive Sequence (128)', 'Product of Array Except Self (238)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Two Pointers', [
-        'Valid Palindrome (125)', 'Two Sum II (167)', '3Sum (15)',
-        'Container With Most Water (11)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Sliding Window', [
-        'Maximum Average Subarray I (643)', 'Best Time to Buy and Sell Stock (121)',
-        'Longest Repeating Character Replacement (424)',
-        'Longest Substring Without Repeating Characters (3)',
-        'Minimum Window Substring (76)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Linked List', [
-        'Middle of the Linked List (876)', 'Linked List Cycle (141)',
-        'Linked List Cycle II (142)', 'Reverse Linked List (206)', 'Reorder List (143)',
-        'Remove Nth Node From End of List (19)', 'Merge Two Sorted Lists (21)',
-        'Merge k Sorted Lists (23)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Stack', [
-        'Valid Parentheses (20)', 'Daily Temperatures (739)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Binary Search', [
-        'Binary Search (704)', 'Find Minimum in Rotated Sorted Array (153)',
-        'Search in Rotated Sorted Array (33)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Trees (DFS/BFS)', [
-        'Invert Binary Tree (226)', 'Maximum Depth of Binary Tree (104)',
-        'Same Tree (100)', 'Subtree of Another Tree (572)',
-        'Lowest Common Ancestor of a BST (235)', 'Binary Tree Level Order Traversal (102)',
-        'Validate Binary Search Tree (98)', 'Kth Smallest Element in a BST (230)',
-        'Construct Binary Tree from Preorder and Inorder (105)',
-        'Binary Tree Maximum Path Sum (124)',
-        'Serialize and Deserialize Binary Tree (297)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Backtracking', [
-        'Combination Sum (39)', 'Word Search (79)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Tries', [
-        'Implement Trie (208)', 'Add and Search Words Data Structure (211)',
-        'Word Search II (212)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Heap / Priority Queue', [
-        'Find Median from Data Stream (295)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Graphs', [
-        'Number of Islands (200)', 'Clone Graph (133)',
-        'Pacific Atlantic Water Flow (417)', 'Graph Valid Tree (261)',
-        'Number of Connected Components (323)', 'Course Schedule (207)',
-        'Alien Dictionary (269)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Dynamic Programming', [
-        'Fibonacci Number (509)', 'Coin Change (322)', 'Climbing Stairs (70)',
-        'House Robber (198)', 'House Robber II (213)', 'Palindromic Substrings (647)',
-        'Longest Palindromic Substring (5)', 'Maximum Product Subarray (152)',
-        'Decode Ways (91)', 'Word Break (139)', 'Longest Increasing Subsequence (300)',
-        'Longest Common Subsequence (1143)', 'Unique Paths (62)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Greedy', [
-        'Boats to Save People (881)', 'Maximum Subarray (53)', 'Jump Game (55)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Intervals', [
-        'Merge Intervals (56)', 'Insert Interval (57)', 'Non-overlapping Intervals (435)',
-        'Meeting Rooms (252)', 'Meeting Rooms II (253)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Matrix', [
-        'Rotate Image (48)', 'Spiral Matrix (54)', 'Set Matrix Zeroes (73)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Bit Manipulation', [
-        'Counting Bits (338)', 'Missing Number (268)', 'Number of 1 Bits (191)',
-        'Reverse Bits (190)', 'Sum of Two Integers (371)',
-    ]),
-    ('21 · Master DSA / Blind 75+ (Sarda) — Bonus', [
-        'Bonus',
-    ]),
-    # ===================== Computer architecture (Clements — replaces Sedgewick) =====================
     ('22 · Computer Architecture with Python & ARM (Clements) — Part 1: Simulating a Computer', [
         'Ch1: From Finite State Machines to Computers',
         'Ch2: High-Speed Introduction to Python', 'Ch3: Data Flow in a Computer',
@@ -383,7 +367,6 @@ CURRICULUM = [
         'Ch11: ARM Addressing Modes', 'Ch12: Subroutines and the Stack',
         'Appendices – Summary of Key Concepts',
     ]),
-    # ===================== Frontend + interview strategy tail =====================
     ('23 · JavaScript Bootcamp (Freeman & Robson)', [
         'JavaScript Basics (variables, types, operators)',
         'Understanding Conditionals and Iteration', 'Understanding Functions',
@@ -391,18 +374,17 @@ CURRICULUM = [
         'Event Handling and DOM Navigation',
     ]),
     ('24 · CSS Bootcamp (Lomidze) — Fundamentals', [
-        'Introduction', 'Setup', 'What is CSS?', 'How to write CSS?',
-        'HTML Elements Tree', 'CSS Selectors', 'CSS Combinators', 'CSS Colors',
-        'Inheritance', 'Text Formatting - Part 1', 'Text Formatting - Part 2',
-        'Box Model', 'Pseudo Classes - Part 1', 'Pseudo Classes - Part 2',
-        'Pseudo Elements', 'Measurement Units - Part 1', 'Measurement Units - Part 2',
-        'Positions - Part 1', 'Positions - Part 2', 'Overflow', 'Floats',
-        'Practice Quiz — Fundamentals',
+        'Introduction', 'Setup', 'What is CSS?', 'How to write CSS?', 'HTML Elements Tree',
+        'CSS Selectors', 'CSS Combinators', 'CSS Colors', 'Inheritance',
+        'Text Formatting - Part 1', 'Text Formatting - Part 2', 'Box Model',
+        'Pseudo Classes - Part 1', 'Pseudo Classes - Part 2', 'Pseudo Elements',
+        'Measurement Units - Part 1', 'Measurement Units - Part 2', 'Positions - Part 1',
+        'Positions - Part 2', 'Overflow', 'Floats', 'Practice Quiz — Fundamentals',
     ]),
     ('24 · CSS Bootcamp (Lomidze) — Backgrounds, Effects & Animations', [
         'Backgrounds - Part 1', 'Backgrounds - Part 2', 'Gradients', 'Shadows',
-        'Transitions', 'Transforms - Part 1', 'Transforms - Part 2',
-        'Animations - Part 1', 'Animations - Part 2', 'Practice Quiz — Effects',
+        'Transitions', 'Transforms - Part 1', 'Transforms - Part 2', 'Animations - Part 1',
+        'Animations - Part 2', 'Practice Quiz — Effects',
     ]),
     ('24 · CSS Bootcamp (Lomidze) — Flexbox', [
         'What Is Flexbox?', 'Flex Container Properties', 'Flex Items Properties',
@@ -410,23 +392,20 @@ CURRICULUM = [
     ]),
     ('24 · CSS Bootcamp (Lomidze) — Project: Grand Hotel', [
         'Grand Hotel - Project Preview', 'Sidebar - Markup', 'Sidebar - Style',
-        'Navigation - Markup', 'Navigation - Style - Part 1',
-        'Navigation - Style - Part 2', 'Create Click Event',
-        'Create markup for Header', 'Header - Style', 'About Us Section - Markup',
-        'About Us Section - Style - Part 1', 'About Us Section - Style - Part 2',
-        'Rooms Section - Markup', 'Rooms Section - Style',
-        'Customers Section - Markup', 'Customers Section - Style', 'Footer - Markup',
-        'Footer - Style', 'Practice Quiz — Grand Hotel layout',
-        'Make "Grand Hotel" Responsive - Part 1',
-        'Make "Grand Hotel" Responsive - Part 2',
+        'Navigation - Markup', 'Navigation - Style - Part 1', 'Navigation - Style - Part 2',
+        'Create Click Event', 'Create markup for Header', 'Header - Style',
+        'About Us Section - Markup', 'About Us Section - Style - Part 1',
+        'About Us Section - Style - Part 2', 'Rooms Section - Markup',
+        'Rooms Section - Style', 'Customers Section - Markup', 'Customers Section - Style',
+        'Footer - Markup', 'Footer - Style', 'Practice Quiz — Grand Hotel layout',
+        'Make "Grand Hotel" Responsive - Part 1', 'Make "Grand Hotel" Responsive - Part 2',
         'Make "Grand Hotel" Responsive - Part 3', 'Practice Quiz — Grand Hotel responsive',
     ]),
     ('24 · CSS Bootcamp (Lomidze) — CSS Grid', [
-        'CSS Grid Introduction', 'Grid Setup', 'How to Create Grid',
-        'Fractional Units', 'Positioning and Spanning Grid Items',
-        'Naming Grid Items - Part 1', 'Naming Grid Items - Part 2',
-        'Naming Grid areas', 'Explicit and Implicit Grid', 'Aligning Grid items',
-        'Aligning Grid tracks', 'max-content, min-content, minmax()',
+        'CSS Grid Introduction', 'Grid Setup', 'How to Create Grid', 'Fractional Units',
+        'Positioning and Spanning Grid Items', 'Naming Grid Items - Part 1',
+        'Naming Grid Items - Part 2', 'Naming Grid areas', 'Explicit and Implicit Grid',
+        'Aligning Grid items', 'Aligning Grid tracks', 'max-content, min-content, minmax()',
         'auto-fill, auto-fit', 'Practice Quiz — CSS Grid',
     ]),
     ('24 · CSS Bootcamp (Lomidze) — Project: Furniture Store', [
