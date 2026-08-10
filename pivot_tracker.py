@@ -27,7 +27,7 @@ from datetime import date
 from tkinter import ttk, messagebox
 
 APP_NAME = "Pivot"          # <- change this to rename the app
-TARGET_DEFAULT = "2026-09-30"   # your pivot deadline
+TARGET_DEFAULT = "2026-12-16"   # your pivot deadline
 
 # ----------------------------------------------------------------------
 # Curriculum — section name + list of items in order.
